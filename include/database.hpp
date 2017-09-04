@@ -10,21 +10,35 @@ namespace IIKH {
 
   // Database of recipes
   class DB {
-    private:
-      std::vector<std::shared_ptr<Recipe> > _all_recipes;
-    protected:
-      void edit_recipe_name(std::string old_name, std::string new_name);
     public:
       DB() {}
       ~DB() {}
 
-      static uint32_t _recipe_count;
+      static const std::string recipe_log_file;
 
-      void add_recipe(std::string name,
+      static uint32_t _recipe_count;
+      static std::vector<std::shared_ptr<Recipe> > _all_recipes;
+
+      static void add_recipes();
+      static void add_recipe(std::string name,
+                      std::vector<std::string> ings,
+                      std::vector<std::string> methods,
+                      bool from_database=false);
+
+      static void edit_recipes();
+      static void edit_recipe_name(std::string old_name,
+                      std::string new_name);
+
+      static void view_recipes();
+      static void view_recipe(const uint32_t index);
+
+      static void log_recipe(std::string name,
                       std::vector<std::string> ings,
                       std::vector<std::string> methods);
-      void edit_recipe(std::string name);
-      Recipe view_recipe(const uint32_t index);
+
+      static void parse_recipe_log();
+
+      static bool recipe_exists(std::string name);
   };
 
 }
