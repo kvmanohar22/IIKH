@@ -6,6 +6,7 @@ namespace IIKH {
     this->ingredients.push_back(name);
     this->ingredient_count += 1;
   }
+
   std::string Recipe::get_ingredient(const uint32_t index) {
     if (index > this->ingredient_count ) {
       std::cerr << "There are " << this->ingredient_count << " ingredients !";
@@ -13,6 +14,7 @@ namespace IIKH {
       return this->ingredients[index];
     }
   }
+
   void Recipe::set_ingredient(const uint32_t index, const std::string name) {
     if (index > this->ingredient_count) {
       std::cerr << "There are " << this->ingredient_count << " ingredients !";

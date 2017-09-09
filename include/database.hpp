@@ -28,9 +28,12 @@ namespace IIKH {
       static void edit_recipes();
       static void edit_recipe_name(std::string old_name,
                       std::string new_name);
+      static void edit_recipe_ings(uint32_t idx, std::vector<std::string> ings);
+      static void edit_recipe_methods(uint32_t idx, std::vector<std::string> methods);
 
-      static void view_recipes();
-      static void view_recipe(const uint32_t index);
+      static void view_recipes(bool ing=false, bool methods=false);
+      static void view_recipe(const uint32_t index, bool ing=false,
+                      bool methods=false);
 
       static void log_recipe(std::string name,
                       std::vector<std::string> ings,
@@ -39,6 +42,13 @@ namespace IIKH {
       static void parse_recipe_log();
 
       static bool recipe_exists(std::string name);
+      static bool recipe_exists(uint32_t index);
+
+      static uint32_t get_recipe_idx(std::string name);
+      static std::string get_recipe_name(uint32_t idx);
+
+      static void read_methods(std::vector<std::string> *methods);
+      static void read_ings(std::vector<std::string> *ings);
   };
 
 }

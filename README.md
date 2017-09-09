@@ -1,3 +1,7 @@
+# Requirements
+
+`cmake (>=2.8)`
+
 # Building
 
 ```bash
