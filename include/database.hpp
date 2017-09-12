@@ -49,6 +49,7 @@ namespace IIKH {
 
       static void read_methods(std::vector<std::string> *methods);
       static void read_ings(std::vector<std::string> *ings);
+      static void read_name(std::string *name);
   };
 
 }

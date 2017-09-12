@@ -16,18 +16,18 @@ int main(int argc, char** argv) {
 
   while(true) {
   	std::cout << "------------------------------------------------\n"
-  		      << "Welcome to IIKH (Interactive Intelligent Kitchen Helper)";
+  		        << "Welcome to IIKH (Interactive Intelligent Kitchen Helper)";
   	int option;
   	std::cout << "\n------------------------------------------------\n"
-  			  << "Here's the menu:\n"
-  			  << "1. Make a plan\n"
-  			  << "2. View plans\n"
-  			  << "3. Edit plans\n"
-  			  << "4. View Recipes\n"
-  			  << "5. Add new Recipes\n"
-  			  << "6. Edit Recipes List\n"
-  			  << "7. Exit\n"
-  			  << "Choose your option: ";
+      			  << "Here's the menu:\n"
+      			  << "1. Make a plan\n"
+      			  << "2. View plans\n"
+      			  << "3. Edit plans\n"
+      			  << "4. View Recipes\n"
+      			  << "5. Add new Recipes\n"
+      			  << "6. Edit Recipes List\n"
+      			  << "7. Exit\n"
+      			  << "Choose your option: ";
   	std::cin >> option;
   	clear = system("clear");
 
@@ -57,8 +57,8 @@ int main(int argc, char** argv) {
         DB::edit_recipes();
         break;
       case 7:
-        std::cout << "Exiting !\n";
         clear = system("clear");
+        std::cout << "Exiting !\n";
         exit(0);
         break;
   		default:

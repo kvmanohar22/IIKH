@@ -1,3 +1,4 @@
+#include <climits>
 #include <memory>
 #include <ostream>
 #include <fstream>
@@ -15,56 +16,55 @@ namespace IIKH {
 
 	void DB::add_recipes() {
 		char repeat;
-		while (true) {
+		do {
 			std::string name;
 			std::vector<std::string> ings;
 			std::vector<std::string> methods;
 
-			std::cout << "Enter the name of recipe: ";
-			std::cin >> name;
-			DB::read_methods(&methods);
+			DB::read_name(&name);
+      DB::read_methods(&methods);
 			DB::read_ings(&ings);
+
 			DB::add_recipe(name, ings, methods);
 			std::cout << "Recipe \"" << name << "\" is added to the database !\n";
 			std::cout << "Add one more recipe (y/n): ";
 			std::cin >> repeat;
-			if (repeat == 'n') {
-				int clear = system("clear");
-				break;
-			}
-		}
+		} while (repeat != 'n');
+		int clear = system("clear");
+		std::cout << "Reply: Your changes are incorporated in the database !\n\n";
 	}
 
+  void DB::read_name(std::string *name) {
+    std::cout << "Enter the name of recipe: ";
+    std::cin >> *name;
+  }
+
 	void DB::read_methods(std::vector<std::string> *methods) {
-		std::cout << "Enter the method(s) of preperation of recipe:\n";
+		std::cout << "Enter the method(s) of preperation of recipe:" << std::endl;
 		methods->clear();
 		std::string method;
-		while (true) {
-			char choice;
-			std::cin >> method;
+		char choice;
+    do {
+    	std::cin.ignore();
+			std::getline(std::cin, method, '\n');
 			methods->push_back(method);
 			std::cout << "Add one more method (y/n): ";
 			std::cin >> choice;
-			if (choice == 'n') {
-				break;
-			}
-		}
+		} while (choice != 'n');
 	}
 
 	void DB::read_ings(std::vector<std::string> *ings) {
-		std::cout << "Enter the ingredient(s) of recipe:\n";
+		std::cout << "Enter the ingredient(s) of recipe:" << std::endl;
 		ings->clear();
 		std::string ing;
-		while (true) {
-			char choice;
-			std::cin >> ing;
+    char choice;
+    do {
+    	std::cin.ignore();
+			std::getline(std::cin, ing, '\n');
 			ings->push_back(ing);
 			std::cout << "Add one more ingredient (y/n): ";
 			std::cin >> choice;
-			if (choice == 'n') {
-				break;
-			}
-		}
+		} while (choice != 'n');
 	}
 
 	void DB::add_recipe(std::string name,
@@ -161,9 +161,9 @@ namespace IIKH {
 				}
 			}
 			if (methods) {
-				std::cout << "\n\tMethod(s) of preperation:\n\t\t";
+				std::cout << "\n\tMethod(s) of preperation:\n";
 				for (size_t i = 0; i < DB::_all_recipes[index]->get_method_count(); ++ i) {
-					std::cout << DB::_all_recipes[index]->get_method(i) << " | ";
+					std::cout << "\t\t" << i+1 << ". " << DB::_all_recipes[index]->get_method(i) << "\n";
 				}
 				std::cout << "\n";
 			}
@@ -189,7 +189,7 @@ namespace IIKH {
 		while (true) {
 			std::cout << "Enter index of recipe from above list that you would like to edit for: ";
 			std::cin >> recipe_idx;
-			if (recipe_idx < 1 || recipe_idx > DB::_recipe_count) {
+			if (recipe_idx < 0 || recipe_idx > DB::_recipe_count) {
 				std::cerr << "Please enter valid recipe index !\n";
 			} else {
 				break;
